@@ -1,26 +1,328 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: "Inter", "system-ui", "sans-serif";
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+
+  --color-accent-400: #a78bfa;
+  --color-accent-500: #8b5cf6;
+  --color-accent-600: #7c3aed;
+
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+
+  --color-rose-400: #fb7185;
+  --color-rose-500: #f43f5e;
+
+  --color-surface-50: #fafafa;
+  --color-surface-100: #f4f4f5;
+  --color-surface-200: #e4e4e7;
+  --color-surface-700: #27272a;
+  --color-surface-800: #18181b;
+  --color-surface-850: #121215;
+  --color-surface-900: #09090b;
+  --color-surface-950: #030305;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ─── Smooth scrolling ─── */
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ─── Rich dark background with mesh gradient ─── */
+body {
+  color: #e4e4e7;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #050510;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 130, 246, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(139, 92, 246, 0.05), transparent),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(16, 185, 129, 0.04), transparent);
+  background-attachment: fixed;
+}
+
+/* ─── Animated mesh gradient that sits behind everything ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 85% 75%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.03) 0%, transparent 60%);
+  animation: mesh-drift 20s ease-in-out infinite alternate;
+}
+
+@keyframes mesh-drift {
+  0% {
+    background:
+      radial-gradient(circle at 15% 25%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 85% 75%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.03) 0%, transparent 60%);
+  }
+  50% {
+    background:
+      radial-gradient(circle at 35% 65%, rgba(59, 130, 246, 0.07) 0%, transparent 50%),
+      radial-gradient(circle at 65% 25%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.04) 0%, transparent 60%);
+  }
+  100% {
+    background:
+      radial-gradient(circle at 60% 40%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 25% 85%, rgba(139, 92, 246, 0.07) 0%, transparent 50%),
+      radial-gradient(circle at 70% 20%, rgba(16, 185, 129, 0.04) 0%, transparent 60%);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── Subtle noise texture overlay ─── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* ─── Custom scrollbar ─── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: #ffffff;
+}
+
+/* ─── Gradient text ─── */
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa, #a78bfa, #60a5fa);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 6s ease-in-out infinite;
+}
+
+.gradient-text-emerald {
+  background: linear-gradient(135deg, #34d399, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ─── Glass cards ─── */
+.glass-card {
+  background: rgba(15, 15, 25, 0.65);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.glass-card-light {
+  background: rgba(20, 20, 35, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+}
+
+/* ─── Glow effects ─── */
+.glow-blue {
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.1), 0 0 100px rgba(59, 130, 246, 0.03), inset 0 0 60px rgba(59, 130, 246, 0.02);
+}
+.glow-purple {
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.1), 0 0 100px rgba(139, 92, 246, 0.03), inset 0 0 60px rgba(139, 92, 246, 0.02);
+}
+.glow-emerald {
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.1), 0 0 100px rgba(16, 185, 129, 0.03), inset 0 0 60px rgba(16, 185, 129, 0.02);
+}
+
+/* ─── Section spacing ─── */
+.section-padding {
+  padding: 7rem 1.5rem;
+}
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 9rem 3rem;
+  }
+}
+@media (min-width: 1280px) {
+  .section-padding {
+    padding: 10rem 5rem;
+  }
+}
+
+/* ─── Section divider gradients ─── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 30%, rgba(255,255,255,0.06) 70%, transparent);
+}
+
+/* ─── Dot grid pattern ─── */
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ─── Fine grid pattern for sections ─── */
+.fine-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ─── Animated border gradient ─── */
+.animated-border {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.animated-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3), rgba(16, 185, 129, 0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* ─── Code block ─── */
+.code-block {
+  background: rgba(5, 5, 16, 0.8);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+/* ─── Lightbox image ─── */
+.lightbox-image {
+  cursor: zoom-in;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.lightbox-image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── KPI counter ─── */
+.kpi-value {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* ─── Responsive typography ─── */
+.text-display {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+.text-heading {
+  font-size: clamp(1.75rem, 3vw, 3rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+.text-subheading {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+.text-body-lg {
+  font-size: clamp(1.05rem, 1.2vw, 1.25rem);
+  line-height: 1.7;
+}
+
+/* ─── Side progress dots ─── */
+.progress-dot {
+  transition: all 0.3s ease;
+}
+.progress-dot.active {
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.4);
+  transform: scale(1.4);
+}
+
+/* ─── Keyboard nav hint ─── */
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.35rem;
+  border-radius: 5px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1;
+}
+
+/* ─── Smooth image rendering ─── */
+img {
+  image-rendering: auto;
+}
+
+/* ─── Print ─── */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  .glass-card {
+    background: white;
+    border: 1px solid #e4e4e7;
+  }
 }
