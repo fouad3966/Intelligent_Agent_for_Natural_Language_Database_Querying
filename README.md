@@ -5,7 +5,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer)
 
-> **Master's Thesis Defense — 2025**  
+> **Master's Thesis Defense — 2026**  
 > By **Ilham Bouharaoua** & **Moustafa Loukarfi**
 
 **🔗 [View Live Presentation / Demo](https://intelligent-agent-for-natural-langu.vercel.app/)**
@@ -64,4 +64,4 @@ If you'd like to run the presentation locally:
 4. Open [http://localhost:3000](http://localhost:3000) in your browser. Use your Arrow Keys (Down/Right) to navigate between sections smoothly!
 
 ---
-*Created as part of a Master's Thesis Defense. 2025.*
+*Created as part of a Master's Thesis Defense. 2026.*

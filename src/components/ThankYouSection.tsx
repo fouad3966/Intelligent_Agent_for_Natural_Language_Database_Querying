@@ -138,7 +138,7 @@ export default function ThankYouSection() {
           className="mt-20 pt-8 border-t border-white/5"
         >
           <p className="text-xs text-white/20">
-            © 2025 — Design of an Intelligent Agent for Natural Language Database Querying
+            © 2026 — Design of an Intelligent Agent for Natural Language Database Querying
           </p>
           <p className="text-xs text-white/15 mt-1">
             Ilham Bouharaoua &amp; Moustafa Loukarfi

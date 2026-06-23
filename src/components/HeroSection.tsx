@@ -29,7 +29,7 @@ export default function HeroSection() {
         >
           <GraduationCap className="w-4 h-4 text-primary-400" />
           <span className="text-sm text-white/60 font-medium">
-            Master&apos;s Thesis Defense — 2025
+            Master&apos;s Thesis Defense — 2026
           </span>
         </motion.div>
 
@@ -77,7 +77,7 @@ export default function HeroSection() {
           <div className="w-px h-4 bg-white/8 hidden sm:block" />
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 text-emerald-400/70" />
-            <span>2025</span>
+            <span>2026</span>
           </div>
         </motion.div>
       </div>
